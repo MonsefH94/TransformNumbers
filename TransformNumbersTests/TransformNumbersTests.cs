@@ -148,8 +148,7 @@ namespace TransformNumbersTests
             string result = transform.DigitstoRomains(enterNumbre);
 
             //Assert
-            Assert.AreEqual("CMXCIX" +
-                "", result);
+            Assert.AreEqual("CMXCIX", result);
         }
         #endregion Tests_With_Three_Digits
 

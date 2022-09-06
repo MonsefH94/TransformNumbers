@@ -11,6 +11,7 @@ namespace transformNumbers
         }
 
         private readonly Dictionary<int, string> dictionary_Transform_Numbers = new Dictionary<int, string>();
+        private string result_Of_Transformation = string.Empty;
 
         private void FillDicotionary()
         {
@@ -49,13 +50,21 @@ namespace transformNumbers
 
         public string DigitstoRomains(int digits_Entered_By_User)
         {
-            const int Number_Of_Digits_Equal_ONE = 1;
             const int Number_Of_Digits_Equal_TWO = 2;
             const int Number_Of_Digits_Equal_THREE = 3;
             const int Number_Of_Digits_Equal_FOUR = 4;
             const int Maximum_Number_That_Can_Be_Transformed = 4999;
+            const int ONE_DIGIT_COEFFICIENT = 1;
+            const int TWO_DIGITS_COEFFICIENT = 10;
+            const int THREE_DIGITS_COEFFICIENT = 100;
+            const int FOUR_DIGITS_COEFFICIENT = 1000;
+            List<int> COEFFICIENT_DIGITS_TABLE = new List<int>() { ONE_DIGIT_COEFFICIENT, TWO_DIGITS_COEFFICIENT, THREE_DIGITS_COEFFICIENT, FOUR_DIGITS_COEFFICIENT };
+            const int index_Of_Two_Digits_Coefficient = 1;
+            const int index_Of_Three_Digits_Coefficient = 2;
+            const int index_Of_Digits_Four_Coefficient = 3;
 
-            int Number_Of_Digits_entered = digits_Entered_By_User.ToString().Length;
+            int Number_Of_Digits_entered = Get_Length_of_Number(digits_Entered_By_User);
+
 
             if (CheckKeyInDictionnary(digits_Entered_By_User))
             {
@@ -65,25 +74,18 @@ namespace transformNumbers
             {
                 switch (Number_Of_Digits_entered)
                 {
-                    case Number_Of_Digits_Equal_ONE:
-
-                        return GetValuefromDictonnary(digits_Entered_By_User);
-
                     case Number_Of_Digits_Equal_TWO:
-
-                        return TransformTwoDigits(digits_Entered_By_User);
+                        return Transform_Digits_To_Romains(digits_Entered_By_User, COEFFICIENT_DIGITS_TABLE, index_Of_Two_Digits_Coefficient);
 
                     case Number_Of_Digits_Equal_THREE:
-
-                        return TransformThreeDigits(digits_Entered_By_User);
+                        return Transform_Digits_To_Romains(digits_Entered_By_User, COEFFICIENT_DIGITS_TABLE, index_Of_Three_Digits_Coefficient);
 
                     case Number_Of_Digits_Equal_FOUR:
-
                         if (digits_Entered_By_User > Maximum_Number_That_Can_Be_Transformed)
                         {
                             throw new InvalidOperationException("Please Enter a number inferior to 4999");
                         }
-                        return TransformFourDigits(digits_Entered_By_User);
+                        return Transform_Digits_To_Romains(digits_Entered_By_User, COEFFICIENT_DIGITS_TABLE, index_Of_Digits_Four_Coefficient);
 
                     default:
                         throw new InvalidOperationException("Please Enter a number inferior to 4 digits");
@@ -91,48 +93,36 @@ namespace transformNumbers
             }
         }
 
-        public string GetValuefromDictonnary(int Number)
+        public string GetValuefromDictonnary(int Number_dictionnary_key)
         {
-            dictionary_Transform_Numbers.TryGetValue(Number, out string result_Of_Transformation);
-            return result_Of_Transformation;
+            dictionary_Transform_Numbers.TryGetValue(Number_dictionnary_key, out string result_Of_Transformation_getted);
+            return result_Of_Transformation_getted;
         }
 
-        public Boolean CheckKeyInDictionnary(int Number)
+        public Boolean CheckKeyInDictionnary(int Number_dictionnary_key)
         {
-            return dictionary_Transform_Numbers.ContainsKey(Number);
+            return dictionary_Transform_Numbers.ContainsKey(Number_dictionnary_key);
         }
 
-        public string TransformTwoDigits(int digits_Entered_By_User)
+        public int Get_Length_of_Number(int Number_data_entrance)
         {
-            string result_Of_Transformation_Two_Digits = string.Empty;
-            const int TWO_DIGITS_COEFFICIENT = 10;
-            int first_Digit_entered = digits_Entered_By_User / TWO_DIGITS_COEFFICIENT;
-            int Last_Digits_entered = digits_Entered_By_User % TWO_DIGITS_COEFFICIENT;
-
-            result_Of_Transformation_Two_Digits = GetValuefromDictonnary(first_Digit_entered * TWO_DIGITS_COEFFICIENT);
-            return result_Of_Transformation_Two_Digits += GetValuefromDictonnary(Last_Digits_entered);
+            return Number_data_entrance.ToString().Length;
         }
 
-        public string TransformThreeDigits(int digits_Entered_By_User)
+        public string Transform_Digits_To_Romains(int digits_Entered_By_User, List<int> Number_Of_Digits_Coefficient, int
+            index_Of_Digits_Coefficient)
         {
-            string result_Of_Transformation_Three_Digits = string.Empty;
-            const int THREE_DIGITS_COEFFICIENT = 100;
-            int first_Digit_entered = digits_Entered_By_User / THREE_DIGITS_COEFFICIENT;
-            int Last_Digits_entered = digits_Entered_By_User % THREE_DIGITS_COEFFICIENT;
-            result_Of_Transformation_Three_Digits = GetValuefromDictonnary(first_Digit_entered * THREE_DIGITS_COEFFICIENT);
-            return result_Of_Transformation_Three_Digits += TransformTwoDigits(Last_Digits_entered);
-        }
+            int Last_Digits_entered = digits_Entered_By_User % Number_Of_Digits_Coefficient[index_Of_Digits_Coefficient];
+            int first_Digit_entered = digits_Entered_By_User - Last_Digits_entered;
 
-        public string TransformFourDigits(int digits_Entered_By_User)
-        {
-            string result_Of_Transformation_Four_Digits = string.Empty;
-            const int FOUR_DIGITS_COEFFICIENT = 1000;
-            int first_Digit_entered = digits_Entered_By_User / FOUR_DIGITS_COEFFICIENT;
-            int Last_Digits_entered = digits_Entered_By_User % FOUR_DIGITS_COEFFICIENT;
+            result_Of_Transformation += GetValuefromDictonnary(first_Digit_entered);
 
-            result_Of_Transformation_Four_Digits = GetValuefromDictonnary(first_Digit_entered * FOUR_DIGITS_COEFFICIENT);
-            return result_Of_Transformation_Four_Digits += TransformThreeDigits(Last_Digits_entered);
+            if (CheckKeyInDictionnary(Last_Digits_entered))
+                return result_Of_Transformation += GetValuefromDictonnary(Last_Digits_entered);
+            else
+                return result_Of_Transformation += Transform_Digits_To_Romains(Last_Digits_entered, Number_Of_Digits_Coefficient, index_Of_Digits_Coefficient - 1);
         }
     }
+
 
 }
