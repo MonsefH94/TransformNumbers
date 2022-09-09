@@ -65,10 +65,6 @@ namespace transformNumbers
             {
                 switch (Number_Of_Digits_entered)
                 {
-                    case Number_Of_Digits_Equal_ONE:
-
-                        return GetValuefromDictonnary(digits_Entered_By_User);
-
                     case Number_Of_Digits_Equal_TWO:
 
                         return TransformTwoDigits(digits_Entered_By_User);
@@ -106,10 +102,11 @@ namespace transformNumbers
         {
             string result_Of_Transformation_Two_Digits = string.Empty;
             const int TWO_DIGITS_COEFFICIENT = 10;
-            int first_Digit_entered = digits_Entered_By_User / TWO_DIGITS_COEFFICIENT;
             int Last_Digits_entered = digits_Entered_By_User % TWO_DIGITS_COEFFICIENT;
+            int first_Digit_entered = digits_Entered_By_User - Last_Digits_entered;
 
-            result_Of_Transformation_Two_Digits = GetValuefromDictonnary(first_Digit_entered * TWO_DIGITS_COEFFICIENT);
+
+            result_Of_Transformation_Two_Digits = GetValuefromDictonnary(first_Digit_entered);
             return result_Of_Transformation_Two_Digits += GetValuefromDictonnary(Last_Digits_entered);
         }
 
@@ -117,9 +114,10 @@ namespace transformNumbers
         {
             string result_Of_Transformation_Three_Digits = string.Empty;
             const int THREE_DIGITS_COEFFICIENT = 100;
-            int first_Digit_entered = digits_Entered_By_User / THREE_DIGITS_COEFFICIENT;
             int Last_Digits_entered = digits_Entered_By_User % THREE_DIGITS_COEFFICIENT;
-            result_Of_Transformation_Three_Digits = GetValuefromDictonnary(first_Digit_entered * THREE_DIGITS_COEFFICIENT);
+            int first_Digit_entered = digits_Entered_By_User - Last_Digits_entered;
+
+            result_Of_Transformation_Three_Digits = GetValuefromDictonnary(first_Digit_entered);
             return result_Of_Transformation_Three_Digits += TransformTwoDigits(Last_Digits_entered);
         }
 
@@ -127,10 +125,10 @@ namespace transformNumbers
         {
             string result_Of_Transformation_Four_Digits = string.Empty;
             const int FOUR_DIGITS_COEFFICIENT = 1000;
-            int first_Digit_entered = digits_Entered_By_User / FOUR_DIGITS_COEFFICIENT;
             int Last_Digits_entered = digits_Entered_By_User % FOUR_DIGITS_COEFFICIENT;
+            int first_Digit_entered = digits_Entered_By_User - Last_Digits_entered;
 
-            result_Of_Transformation_Four_Digits = GetValuefromDictonnary(first_Digit_entered * FOUR_DIGITS_COEFFICIENT);
+            result_Of_Transformation_Four_Digits = GetValuefromDictonnary(first_Digit_entered);
             return result_Of_Transformation_Four_Digits += TransformThreeDigits(Last_Digits_entered);
         }
     }
