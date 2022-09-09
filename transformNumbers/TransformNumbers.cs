@@ -79,6 +79,8 @@ namespace transformNumbers
             {
                 switch (Number_Of_Digits_entered)
                 {
+                    case Number_Of_Digits_Equal_ONE:
+                        throw new InvalidOperationException("Please Enter a number inferior to 4999 digits with 4 digits max");
                     case Number_Of_Digits_Equal_TWO:
                     case Number_Of_Digits_Equal_THREE:
                         return Transform_Digits_To_Romains(digits_Entered_By_User);
@@ -90,7 +92,7 @@ namespace transformNumbers
                         return Transform_Digits_To_Romains(digits_Entered_By_User);
 
                     default:
-                        throw new InvalidOperationException("Please Enter a number inferior to 4 digits");
+                        throw new InvalidOperationException("Please Enter a number with 4 digits max");
                 }
             }
         }
@@ -124,7 +126,7 @@ namespace transformNumbers
 
             result_Of_Transformation += GetValuefromDictonnary(first_Digit_entered);
 
-            return CheckKeyInDictionnary(Last_Digits_entered) ? result_Of_Transformation += GetValuefromDictonnary(Last_Digits_entered) :  Transform_Digits_To_Romains(Last_Digits_entered);
+            return CheckKeyInDictionnary(Last_Digits_entered) ? result_Of_Transformation += GetValuefromDictonnary(Last_Digits_entered) : Transform_Digits_To_Romains(Last_Digits_entered);
 
         }
     }

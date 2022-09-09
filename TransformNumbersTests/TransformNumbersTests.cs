@@ -17,7 +17,7 @@ namespace TransformNumbersTests
             TransformNumbers transform = new TransformNumbers();
 
             //Assert
-            Assert.ThrowsException<InvalidOperationException>(() => transform.DigitstoRomains(enterNumbre), "Please Enter a number inferior to 4 digits");
+            Assert.ThrowsException<InvalidOperationException>(() => transform.DigitstoRomains(enterNumbre), "Please Enter a number with 4 digits max");
         }
 
         [TestMethod]
@@ -29,6 +29,17 @@ namespace TransformNumbersTests
 
             //Assert
             Assert.ThrowsException<InvalidOperationException>(() => transform.DigitstoRomains(enterNumbre), "Please Enter a number inferior to 4999");
+        }
+
+         [TestMethod]
+        public void Should_return_Throw_Exception_When_0_Is_Entered()
+        {
+            //Arrange
+            int enterNumbre = 0;
+            TransformNumbers transform = new TransformNumbers();
+
+            //Assert
+            Assert.ThrowsException<InvalidOperationException>(() => transform.DigitstoRomains(enterNumbre), "Please Enter a number inferior to 4999 digits with 4 digits max");
         }
         #endregion Errors_Tests
 
