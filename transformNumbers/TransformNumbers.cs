@@ -83,7 +83,6 @@ namespace transformNumbers
                         throw new InvalidOperationException("Please Enter a number inferior to 4999 digits with 4 digits max");
                     case Number_Of_Digits_Equal_TWO:
                     case Number_Of_Digits_Equal_THREE:
-                        return Transform_Digits_To_Romains(digits_Entered_By_User);
                     case Number_Of_Digits_Equal_FOUR:
                         if (digits_Entered_By_User > Maximum_Number_That_Can_Be_Transformed)
                         {
@@ -130,6 +129,4 @@ namespace transformNumbers
 
         }
     }
-
-
 }
