@@ -6,6 +6,11 @@ namespace transformNumbers
 {
     public class TransformNumbersFullTDD
     {
+        //TODO
+        //Tuple<int, string> tDD = new Tuple<int, string>(0, "");
+
+        Dictionary<int,string> Transform_numbers_To_Roman = new Dictionary<int,string>();
+        Dictionary<string, int> Transform__To_Roman = new Dictionary<string, int>();
 
         public string DigitstoRomains(int digits_Entered_By_User)
         {
@@ -31,6 +36,28 @@ namespace transformNumbers
                 case 17:
                 case 18:
                     return Transform_Numbers_From_9_To_18(digits_Entered_By_User);
+                case 19:               
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                    return Transform_Numbers_From_19_29(digits_Entered_By_User);
+                case 29:
+                case 30:
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
+                case 36:
+                case 37:
+                case 38:
+                    return Transform_Numbers_From_29_38(digits_Entered_By_User);
 
                 default:
                     return string.Empty;
@@ -40,11 +67,8 @@ namespace transformNumbers
         public string Transform_Numbers_From_1_To_3(int digits_Entered_By_User)
         {
             StringBuilder result_in_romains = new StringBuilder();
-            for (int i = 0; i < digits_Entered_By_User; i++)
-            {
-                result_in_romains.Append("I");
-            }
-            return result_in_romains.ToString();
+            //TODO
+            return result_in_romains.Insert(0,"I", digits_Entered_By_User).ToString();
         }
 
         public string Transform_Numbers_From_1_To_8(int digits_Entered_By_User)
@@ -59,10 +83,6 @@ namespace transformNumbers
             if (rest_of_substitution == -1)
             {
                 return result_in_romains.Insert(0, "I").ToString();
-            }
-            else if (rest_of_substitution == 0)
-            {
-                return result_in_romains.ToString();
             }
             else
             {
@@ -79,9 +99,35 @@ namespace transformNumbers
             {
                 return result_in_romains.Insert(0, "I").ToString();
             }
-            else if (rest_of_substitution == 0)
+            else
             {
-                return result_in_romains.ToString();
+                return result_in_romains.Append(Transform_Numbers_From_1_To_8(rest_of_substitution)).ToString();
+            }
+        }
+
+        public string Transform_Numbers_From_19_29(int digits_Entered_By_User)
+        {
+            StringBuilder result_in_romains = new StringBuilder();
+            result_in_romains.Append("XX");
+            int rest_of_substitution = digits_Entered_By_User - 20;
+            if (rest_of_substitution == -1)
+            {
+                return result_in_romains.Insert(1, "I").ToString();
+            }
+            else
+            {
+                return result_in_romains.Append(Transform_Numbers_From_1_To_8(rest_of_substitution)).ToString();
+            }
+        }
+
+        public string Transform_Numbers_From_29_38(int digits_Entered_By_User)
+        {
+            StringBuilder result_in_romains = new StringBuilder();
+            result_in_romains.Append("XXX");
+            int rest_of_substitution = digits_Entered_By_User - 30;
+            if (rest_of_substitution == -1)
+            {
+                return result_in_romains.Insert(2, "I").ToString();
             }
             else
             {
