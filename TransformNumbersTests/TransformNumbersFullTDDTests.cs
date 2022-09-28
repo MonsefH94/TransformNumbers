@@ -11,13 +11,42 @@ namespace TransformNumbersTests
     [TestClass]
     public class TransformNumbersFullTDDTests
     {
+        private TransformNumbersFullTDD transform;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            transform = new TransformNumbersFullTDD();
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(MyArabicRomanTestcases))]
+        public void Should_return_correct_roman_number_when_given_arabic_integer(int arabic, string expectedRoman)
+        {
+            //Act
+            string actualRoman = transform.DigitstoRomains(arabic);
+
+            //Assert
+            Assert.AreEqual(expectedRoman, actualRoman);
+        }
+
+        public static IEnumerable<object[]> MyArabicRomanTestcases
+        {
+            get
+            {
+                yield return new object[] { 1, "I" };
+                yield return new object[] { 2, "II" };
+                yield return new object[] { 3, "III" };
+            }
+        }
+
         #region Tests_With_One_Digits
-        [TestMethod]
+        /*[TestMethod]
         public void Should_return_I_when_1_is_entered()
         {
             //Arrange
             int enterNumbre = 1;
-            TransformNumbersFullTDD transform = new TransformNumbersFullTDD();
+        
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -31,7 +60,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 2;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -45,21 +74,21 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 3;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
 
             //Assert
             Assert.AreEqual("III", result);
-        }
+        }*/
 
         [TestMethod]
         public void Should_return_IV_when_3_is_entered()
         {
             //Arrange
             int enterNumbre = 4;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -73,7 +102,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 5;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -87,7 +116,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 6;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -101,7 +130,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 7;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -115,7 +144,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 8;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -129,7 +158,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 9;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -147,7 +176,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 10;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -161,7 +190,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 11;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -175,7 +204,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 12;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -189,7 +218,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 13;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -203,7 +232,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 14;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -217,7 +246,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 15;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -231,7 +260,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 16;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -245,7 +274,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 17;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);
@@ -259,7 +288,7 @@ namespace TransformNumbersTests
         {
             //Arrange
             int enterNumbre = 18;
-            TransformNumbers transform = new TransformNumbers();
+            transform = new TransformNumbersFullTDD();
 
             //Act
             string result = transform.DigitstoRomains(enterNumbre);

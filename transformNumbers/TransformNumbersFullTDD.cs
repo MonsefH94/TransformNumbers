@@ -14,13 +14,12 @@ namespace transformNumbers
                 case 1:
                 case 2:
                 case 3:
-                    return Transform_Numbers_From_1_To_3(digits_Entered_By_User);
                 case 4:
                 case 5:
                 case 6:
                 case 7:
                 case 8:
-                    return Transform_Numbers_From_4_To_8(digits_Entered_By_User);
+                    return Transform_Numbers_From_1_To_8(digits_Entered_By_User);
                 case 9:
                 case 10:
                 case 11:
@@ -48,11 +47,15 @@ namespace transformNumbers
             return result_in_romains.ToString();
         }
 
-        public string Transform_Numbers_From_4_To_8(int digits_Entered_By_User)
+        public string Transform_Numbers_From_1_To_8(int digits_Entered_By_User)
         {
             StringBuilder result_in_romains = new StringBuilder();
-            result_in_romains.Append("V");
             int rest_of_substitution = digits_Entered_By_User - 5;
+            if (digits_Entered_By_User < 4)
+            {
+                return result_in_romains.Append(Transform_Numbers_From_1_To_3(digits_Entered_By_User)).ToString();
+            }
+            result_in_romains.Append("V");
             if (rest_of_substitution == -1)
             {
                 return result_in_romains.Insert(0, "I").ToString();
@@ -82,7 +85,7 @@ namespace transformNumbers
             }
             else
             {
-                return result_in_romains.Append(Transform_Numbers_From_4_To_8(rest_of_substitution)).ToString();
+                return result_in_romains.Append(Transform_Numbers_From_1_To_8(rest_of_substitution)).ToString();
             }
         }
     }
